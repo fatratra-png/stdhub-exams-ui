@@ -80,7 +80,7 @@ const Sidebar = ({ role = "student" }) => {
                                           alt="STDExams"
                                           className="h-8 w-8 object-contain rounded-full"
                                     />
-                                    <span className="text-white font-bold text-base">
+                                    <span className="text-white text-base">
                                           HEI STDExams
                                     </span>
                               </div>
