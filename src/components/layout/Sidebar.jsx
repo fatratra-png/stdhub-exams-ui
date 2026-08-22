@@ -18,7 +18,7 @@ const navigation = [
   { label: "Students Admin", icon: faUserGear }
 ];
 
-function Sidebar() {
+const Sidebar = () => {
   return (
     <>
       <aside className="w-64 h-screen bg-navy-dark text-white flex flex-col justify-between p-4 shrink-0 shadow-xl border-r border-white/5 select-none">

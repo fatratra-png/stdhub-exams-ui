@@ -1,7 +1,7 @@
 // import React from "react";
 import Sidebar from "./components/layout/Sidebar";
 
-function App() {
+const App = () => {
   return (
     <div className="flex min-h-screen bg-surface">
       <Sidebar />
