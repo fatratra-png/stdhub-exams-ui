@@ -1,51 +1,57 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
       faBars,
       faBookOpen,
       faChartPie,
+      faClipboardCheck,
       faFileAlt,
-      faHistory,
-      faSignOutAlt,
+      faRightFromBracket,
       faTimes,
-      faUserGear,
+      faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
 import STDHUB_LOGO from "../../assets/stdhub-logo-pwa.png";
-
-const STUDENT_NAV_ITEMS = [
-      { id: "dashboard", label: "Dashboard", icon: faChartPie },
-      { id: "exams", label: "Exams", icon: faFileAlt },
-      { id: "grades-history", label: "Grades & History", icon: faHistory },
-      { id: "courses", label: "Courses", icon: faBookOpen },
-];
-
-const ADMIN_NAV_ITEMS = [
-      ...STUDENT_NAV_ITEMS,
-      { id: "students-admin", label: "Students Admin", icon: faUserGear },
-];
+import AuthContext from "../../context/AuthContext";
 
 const NAV_ITEMS = {
-      student: STUDENT_NAV_ITEMS,
-      admin: ADMIN_NAV_ITEMS,
+      admin: [
+            { to: "/admin", label: "Tableau de bord", icon: faChartPie, end: true },
+            { to: "/admin/students", label: "Étudiants", icon: faUserGraduate, end: false },
+            { to: "/admin/courses", label: "Cours", icon: faBookOpen, end: false },
+            { to: "/admin/exams", label: "Examens", icon: faFileAlt, end: false },
+      ],
+      student: [
+            {
+                  to: "/student",
+                  label: "Examens disponibles",
+                  icon: faFileAlt,
+                  end: true,
+            },
+            {
+                  to: "/student/results",
+                  label: "Mes résultats",
+                  icon: faClipboardCheck,
+                  end: false,
+            },
+      ],
 };
 
 const ROLE_LABELS = {
-      student: "Student",
-      admin: "Admin",
+      admin: "Administrateur",
+      student: "Étudiant",
 };
 
-const Sidebar = ({ role = "student" }) => {
+const Sidebar = () => {
       const [open, setOpen] = useState(false);
-      const [selectedId, setSelectedId] = useState(STUDENT_NAV_ITEMS[0].id);
+      const { user, logout } = useContext(AuthContext);
+      const navigate = useNavigate();
 
-      const navItems = NAV_ITEMS[role] || STUDENT_NAV_ITEMS;
-      const activeId = navItems.some(({ id }) => id === selectedId)
-            ? selectedId
-            : navItems[0].id;
-
-      const handleNavClick = (id) => {
-            setSelectedId(id);
-            setOpen(false);
+      const navItems = user ? NAV_ITEMS[user.role] || [] : [];
+      const handleNavClick = () => setOpen(false);
+      const handleLogout = () => {
+            logout();
+            navigate("/login");
       };
 
       return (
@@ -96,12 +102,14 @@ const Sidebar = ({ role = "student" }) => {
                         </div>
 
                         <nav className="flex flex-col gap-1 flex-1 overflow-y-auto">
-                              {navItems.map(({ id, label, icon }) => (
-                                    <button
-                                          key={id}
-                                          onClick={() => handleNavClick(id)}
-                                          className={
-                                                activeId === id
+                              {navItems.map(({ to, label, icon, end }) => (
+                                    <NavLink
+                                          key={to}
+                                          to={to}
+                                          end={end}
+                                          onClick={handleNavClick}
+                                          className={({ isActive }) =>
+                                                isActive
                                                       ? "sidebar-link-active"
                                                       : "sidebar-link"
                                           }
@@ -113,20 +121,26 @@ const Sidebar = ({ role = "student" }) => {
                                           <span className="truncate">
                                                 {label}
                                           </span>
-                                    </button>
+                                    </NavLink>
                               ))}
                         </nav>
 
                         <div className="border-t border-white/10 pt-4 mt-4 shrink-0">
                               <p className="text-white/40 text-xs px-2 mb-3 uppercase tracking-widest truncate">
-                                    {ROLE_LABELS[role] || ROLE_LABELS.student}
+                                    {(user && ROLE_LABELS[user.role]) || "—"}
                               </p>
-                              <button className="sidebar-link w-full text-red-300 hover:text-red-200 hover:bg-red-500/10">
+                              <p className="text-white text-sm px-2 mb-3 truncate">
+                                    {(user && (user.name || user.email)) || "—"}
+                              </p>
+                              <button
+                                    onClick={handleLogout}
+                                    className="sidebar-link w-full text-red-300 hover:text-red-200 hover:bg-red-500/10"
+                              >
                                     <FontAwesomeIcon
-                                          icon={faSignOutAlt}
+                                          icon={faRightFromBracket}
                                           className="w-4 h-4 shrink-0"
                                     />
-                                    <span>Logout</span>
+                                    <span>Déconnexion</span>
                               </button>
                         </div>
                   </aside>
