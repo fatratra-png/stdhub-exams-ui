@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./components/layout/Sidebar";
 import Placeholder from "./pages/Placeholder";
+import Login from "./Login";
 
 const SpaceLayout = ({ role }) => (
   <div className="flex min-h-screen bg-surface">
@@ -12,9 +13,9 @@ const SpaceLayout = ({ role }) => (
 );
 
 const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Navigate to="/student" replace />} />
+  <Routes>
+    <Route path="/" element={<Navigate to="/login" replace />} />
+    <Route path="/login" element={<Login />} />
 
       <Route path="/admin" element={<SpaceLayout role="admin" />}>
         <Route index element={<Placeholder title="Tableau de bord" description="Compteurs et liens rapides." />} />
@@ -32,9 +33,8 @@ const App = () => (
         <Route path="results" element={<Placeholder title="Mes résultats" />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  </BrowserRouter>
+    <Route path="*" element={<Navigate to="/login" replace />} />
+  </Routes>
 );
 
 export default App;
