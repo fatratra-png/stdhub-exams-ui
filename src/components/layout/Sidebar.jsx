@@ -12,20 +12,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import STDHUB_LOGO from "../../assets/stdhub-logo-pwa.png";
 
-const NAV_ITEMS = [
+const STUDENT_NAV_ITEMS = [
       { id: "dashboard", label: "Dashboard", icon: faChartPie },
       { id: "exams", label: "Exams", icon: faFileAlt },
       { id: "grades-history", label: "Grades & History", icon: faHistory },
       { id: "courses", label: "Courses", icon: faBookOpen },
+];
+
+const ADMIN_NAV_ITEMS = [
+      ...STUDENT_NAV_ITEMS,
       { id: "students-admin", label: "Students Admin", icon: faUserGear },
 ];
 
-const Sidebar = () => {
+const NAV_ITEMS = {
+      student: STUDENT_NAV_ITEMS,
+      admin: ADMIN_NAV_ITEMS,
+};
+
+const ROLE_LABELS = {
+      student: "Student",
+      admin: "Admin",
+};
+
+const Sidebar = ({ role = "student" }) => {
       const [open, setOpen] = useState(false);
-      const [activeId, setActiveId] = useState(NAV_ITEMS[0].id);
+      const [selectedId, setSelectedId] = useState(STUDENT_NAV_ITEMS[0].id);
+
+      const navItems = NAV_ITEMS[role] || STUDENT_NAV_ITEMS;
+      const activeId = navItems.some(({ id }) => id === selectedId)
+            ? selectedId
+            : navItems[0].id;
 
       const handleNavClick = (id) => {
-            setActiveId(id);
+            setSelectedId(id);
             setOpen(false);
       };
 
@@ -77,7 +96,7 @@ const Sidebar = () => {
                         </div>
 
                         <nav className="flex flex-col gap-1 flex-1 overflow-y-auto">
-                              {NAV_ITEMS.map(({ id, label, icon }) => (
+                              {navItems.map(({ id, label, icon }) => (
                                     <button
                                           key={id}
                                           onClick={() => handleNavClick(id)}
@@ -100,7 +119,7 @@ const Sidebar = () => {
 
                         <div className="border-t border-white/10 pt-4 mt-4 shrink-0">
                               <p className="text-white/40 text-xs px-2 mb-3 uppercase tracking-widest truncate">
-                                    Student
+                                    {ROLE_LABELS[role] || ROLE_LABELS.student}
                               </p>
                               <button className="sidebar-link w-full text-red-300 hover:text-red-200 hover:bg-red-500/10">
                                     <FontAwesomeIcon
