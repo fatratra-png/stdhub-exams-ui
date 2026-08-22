@@ -10,16 +10,19 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Veuillez renseigner votre email et votre mot de passe.");
       return;
     }
     setError("");
-    // TODO: remplacer par POST /api/auth/login
-    login(email);
-    navigate(email === "admin@stdhub.mg" ? "/admin" : "/student");
+    try {
+      const user = await login(email, password);
+      navigate(user.role === "admin" ? "/admin" : "/student");
+    } catch (err) {
+      setError(err.message || "Connexion impossible");
+    }
   };
 
   return (

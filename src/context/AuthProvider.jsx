@@ -1,5 +1,11 @@
 import { useState } from "react";
 import AuthContext from "./AuthContext";
+import api from "../api/apiClient";
+
+const ROLE_MAP = {
+  ADMIN: "admin",
+  STUDENT: "student",
+};
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
@@ -7,18 +13,18 @@ const AuthProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const login = (email) => {
-    const mockUser =
-      email === "admin@stdhub.mg"
-        ? { id: 1, name: "Admin", email, role: "admin" }
-        : { id: 2, name: "Étudiant", email, role: "student" };
-    setUser(mockUser);
-    localStorage.setItem("user", JSON.stringify(mockUser));
-    return mockUser;
+  const login = async (email, password) => {
+    const data = await api.post("/api/auth/login", { email, password });
+    const user = { ...data.user, role: ROLE_MAP[data.user.role] || "student" };
+    setUser(user);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(user));
+    return user;
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
   };
 
