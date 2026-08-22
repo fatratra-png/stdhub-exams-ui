@@ -12,6 +12,7 @@ const SpaceLayout = ({ role }) => (
       <main className="p-6 lg:p-8 flex-1 w-full max-w-7xl mx-auto">
         <Outlet />
       </main>
+
     </div>
   </div>
 );
