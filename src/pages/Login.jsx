@@ -19,7 +19,7 @@ const Login = () => {
     setError("");
     // TODO: remplacer par POST /api/auth/login
     login(email);
-    navigate(email.startsWith("admin") ? "/admin" : "/student");
+    navigate(email === "admin@stdhub.mg" ? "/admin" : "/student");
   };
 
   return (
@@ -50,7 +50,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="input-field"
-            placeholder="prenom.nom@hei.mg"
+            placeholder="hei.prenom@gmail.com"
           />
         </label>
 
