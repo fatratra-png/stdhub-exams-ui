@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
       faBars,
@@ -7,19 +7,37 @@ import {
       faChartPie,
       faClipboardCheck,
       faFileAlt,
-      faRightFromBracket,
       faTimes,
       faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
 import STDHUB_LOGO from "../../assets/stdhub-logo-pwa.png";
-import AuthContext from "../../context/AuthContext";
 
 const NAV_ITEMS = {
       admin: [
-            { to: "/admin", label: "Tableau de bord", icon: faChartPie, end: true },
-            { to: "/admin/students", label: "Étudiants", icon: faUserGraduate, end: false },
-            { to: "/admin/courses", label: "Cours", icon: faBookOpen, end: false },
-            { to: "/admin/exams", label: "Examens", icon: faFileAlt, end: false },
+            {
+                  to: "/admin",
+                  label: "Tableau de bord",
+                  icon: faChartPie,
+                  end: true,
+            },
+            {
+                  to: "/admin/students",
+                  label: "Étudiants",
+                  icon: faUserGraduate,
+                  end: false,
+            },
+            {
+                  to: "/admin/courses",
+                  label: "Cours",
+                  icon: faBookOpen,
+                  end: false,
+            },
+            {
+                  to: "/admin/exams",
+                  label: "Examens",
+                  icon: faFileAlt,
+                  end: false,
+            },
       ],
       student: [
             {
@@ -42,17 +60,11 @@ const ROLE_LABELS = {
       student: "Étudiant",
 };
 
-const Sidebar = () => {
+const Sidebar = ({ role = "student" }) => {
       const [open, setOpen] = useState(false);
-      const { user, logout } = useContext(AuthContext);
-      const navigate = useNavigate();
 
-      const navItems = user ? NAV_ITEMS[user.role] || [] : [];
+      const navItems = NAV_ITEMS[role] || [];
       const handleNavClick = () => setOpen(false);
-      const handleLogout = () => {
-            logout();
-            navigate("/login");
-      };
 
       return (
             <>
@@ -126,22 +138,9 @@ const Sidebar = () => {
                         </nav>
 
                         <div className="border-t border-white/10 pt-4 mt-4 shrink-0">
-                              <p className="text-white/40 text-xs px-2 mb-3 uppercase tracking-widest truncate">
-                                    {(user && ROLE_LABELS[user.role]) || "—"}
+                              <p className="text-white/40 text-xs px-2 uppercase tracking-widest truncate">
+                                    {ROLE_LABELS[role] || "—"}
                               </p>
-                              <p className="text-white text-sm px-2 mb-3 truncate">
-                                    {(user && (user.name || user.email)) || "—"}
-                              </p>
-                              <button
-                                    onClick={handleLogout}
-                                    className="sidebar-link w-full text-red-300 hover:text-red-200 hover:bg-red-500/10"
-                              >
-                                    <FontAwesomeIcon
-                                          icon={faRightFromBracket}
-                                          className="w-4 h-4 shrink-0"
-                                    />
-                                    <span>Déconnexion</span>
-                              </button>
                         </div>
                   </aside>
             </>
