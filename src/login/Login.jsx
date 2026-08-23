@@ -129,7 +129,7 @@ function Login() {
                                         className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0A1A33] transition"
                                     >
                                         {showPassword ? (
-                                            <img src="/oeil_barré.png" alt="" width="20" height="20" />
+                                            <img src="/oeil-barré.png" alt="" width="20" height="20" />
                                         ) : (
                                             <img src="/oeil.png" alt="" width="20" height="20" />
                                         )}
