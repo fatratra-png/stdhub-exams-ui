@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme {
   --font-sans: "Quicksand", sans-serif;
   --color-navy: #001948;
@@ -177,3 +178,4 @@
   0% { width: 0%; }
   100% { width: 100%; }
 }
+
