@@ -55,22 +55,6 @@ const NAV_ITEMS = {
       ],
 };
 
-<<<<<<< HEAD
-const ROLE_LABELS = {
-      admin: "Administrateur",
-      student: "Étudiant",
-};
-=======
-const Sidebar = () => {
-  return (
-    <>
-      <aside className="w-64 h-screen bg-navy-dark text-white flex flex-col justify-between p-4 shrink-0 shadow-xl border-r border-white/5 select-none">
-            <div className="flex flex-col gap-6">
-              <div className="px-4 py-3 border-b border-white/10 flex items-center gap-3">
-                <img src={STDHUB_LOGO} alt="Logo" className="w-8 h-8 object-contain" />
-                <h1 className="text-xl font-bold tracking-tight text-gold">HEI STDHub</h1>
-              </div>
->>>>>>> 5659855 (refactor: convert App and Layout to arrow function)
 
 const Sidebar = ({ role = "student" }) => {
       const [open, setOpen] = useState(false);
