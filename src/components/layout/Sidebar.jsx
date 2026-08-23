@@ -61,6 +61,7 @@ const ROLE_LABELS = {
       student: "Student",
 };
 
+
 const Sidebar = ({ role = "student", userName = "Jules Titran", onLogout }) => {
       const [open, setOpen] = useState(false);
 
