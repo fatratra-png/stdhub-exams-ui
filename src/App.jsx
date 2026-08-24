@@ -1,15 +1,20 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./components/layout/Sidebar";
+import Navbar from "./components/layout/Navbar";
 import Placeholder from "./pages/Placeholder";
 import Login from "./login/Login";
 import RoleRoute from "./login/RoleRoute";
 
 const SpaceLayout = ({ role }) => (
-  <div className="flex min-h-screen bg-surface">
+  <div className="flex min-h-screen bg-surface w-full overflow-hidden">
     <Sidebar role={role} />
-    <main className="flex-1 p-6 pt-16 lg:p-8 lg:pt-8">
-      <Outlet />
-    </main>
+    <div className="flex-1 flex flex-col min-w-0 w-full h-screen overflow-y-auto">
+      <Navbar />
+      <main className="p-6 lg:p-8 flex-1 w-full mx-auto">
+        <Outlet />
+      </main>
+
+    </div>
   </div>
 );
 
@@ -18,14 +23,7 @@ const App = () => (
     <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/login" element={<Login />} />
 
-    <Route
-      path="/admin"
-      element={
-        <RoleRoute rolesAutorises={["admin"]}>
-          <SpaceLayout role="admin" />
-        </RoleRoute>
-      }
-    >
+    <Route path="/admin" element={<RoleRoute rolesAutorises={["admin"]}><SpaceLayout role="admin" /></RoleRoute>}>
       <Route index element={<Placeholder title="Tableau de bord" description="Compteurs et liens rapides." />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
@@ -34,14 +32,7 @@ const App = () => (
       <Route path="exams/:id/results" element={<Placeholder title="Résultats de l'examen" />} />
     </Route>
 
-    <Route
-      path="/student"
-      element={
-        <RoleRoute rolesAutorises={["student"]}>
-          <SpaceLayout role="student" />
-        </RoleRoute>
-      }
-    >
+    <Route path="/student" element={<RoleRoute rolesAutorises={["student"]}><SpaceLayout role="student" /></RoleRoute>}>
       <Route index element={<Placeholder title="Examens disponibles" />} />
       <Route path="exams/:id" element={<Placeholder title="Passage de l'examen" />} />
       <Route path="exams/:id/result" element={<Placeholder title="Note et correction" />} />
