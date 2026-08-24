@@ -28,7 +28,7 @@ function Login() {
                 navigate("/student");
             }
         } catch {
-            setError("Incorrect email or password");
+            setError("Email ou mot de passe incorrect");
         } finally {
             setLoading(false);
         }
@@ -54,34 +54,34 @@ function Login() {
                         <div className="absolute -bottom-10 left-10 size-40 rounded-full bg-white/8" />
                         <div className="relative z-10 flex items-center gap-3">
                             <div className="flex size-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-                                <img className="size-8 object-contain" src="/logo.png" alt="HEI STDhub logo" />
+                                <img className="size-8 object-contain" src="/logo.png" alt="Logo HEI STDhub" />
                             </div>
                             <div>
                                 <span className="text-white font-bold text-lg leading-none block">HEI STDhub</span>
-                                <span className="text-white/60 text-xs">Exam platform</span>
+                                <span className="text-white/60 text-xs">Plateforme d'examens</span>
                             </div>
                         </div>
 
                         <div className="relative z-10">
                             <h2 className="text-white text-3xl font-bold leading-snug mb-3">
-                                Welcome back<br />to our community!
+                                Bon retour<br />parmi nous !
                             </h2>
                             <p className="text-white/60 text-sm leading-relaxed">
-                                Sign in to access your exams and track your results.
+                                Connectez-vous pour accéder à vos examens et suivre vos résultats.
                             </p>
                         </div>
 
                         <div className="relative z-10 bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/20">
-                            <p className="text-white/80 text-xs font-medium">HEI Madagascar Community</p>
-                            <p className="text-white/50 text-xs mt-0.5">Students · Admin</p>
+                            <p className="text-white/80 text-xs font-medium">Communauté HEI Madagascar</p>
+                            <p className="text-white/50 text-xs mt-0.5">Étudiants · Admin</p>
                         </div>
                     </div>
 
                     <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 py-10">
                         <div className="mb-8">
-                            <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1A33]">Sign in</h1>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1A33]">Connexion</h1>
                             <p className="text-gray-400 text-sm mt-1">
-                                Enter your credentials to continue
+                                Entrez vos identifiants pour continuer
                             </p>
                         </div>
 
@@ -109,7 +109,7 @@ function Login() {
 
                             <div>
                                 <label htmlFor="password" className="text-xs font-bold text-gray-500 mb-2 block uppercase tracking-wide">
-                                    Password
+                                    Mot de passe
                                 </label>
                                 <div className="relative">
                                     <input
@@ -124,7 +124,7 @@ function Login() {
                                     <button
                                         type="button"
                                         tabIndex={-1}
-                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                                         onClick={() => setShowPassword((s) => !s)}
                                         className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0A1A33] transition"
                                     >
@@ -143,9 +143,9 @@ function Login() {
                                 className="w-full py-3.5 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                                 style={{ background: "linear-gradient(135deg, #0A1A33, #001948)" }}
                             >
-                                {loading ? "Signing in..." : (
+                                {loading ? "Connexion en cours..." : (
                                     <>
-                                        <span>Sign in</span>
+                                        <span>Se connecter</span>
                                         <span>→</span>
                                     </>
                                 )}
