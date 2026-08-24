@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
 import StudentDashboard from "./components/dashboard/StudentDashboard";
+import StudentsPage from "./pages/StudentPage";
 import Placeholder from "./pages/Placeholder";
 
 const SpaceLayout = ({ role }) => (
@@ -12,7 +13,6 @@ const SpaceLayout = ({ role }) => (
       <main className="p-6 lg:p-8 flex-1 w-full mx-auto">
         <Outlet />
       </main>
-
     </div>
   </div>
 );
@@ -24,7 +24,7 @@ const App = () => (
 
       <Route path="/admin" element={<SpaceLayout role="admin" />}>
         <Route index element={<Placeholder title="Admin Dashboard" description="Counters and quick links." />} />
-        <Route path="students" element={<Placeholder title="Students Management" />} />
+        <Route path="students" element={<StudentsPage />} />
         <Route path="courses" element={<Placeholder title="Courses Management" />} />
         <Route path="exams" element={<Placeholder title="Exams Management" />} />
         <Route path="exams/:id/questions" element={<Placeholder title="Question Editor" />} />
