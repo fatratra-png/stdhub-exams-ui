@@ -43,13 +43,13 @@ const NAV_ITEMS = {
       student: [
             {
                   to: "/student",
-                  label: "Available Exams",
+                  label: "Examens Disponibles",
                   icon: faFileAlt,
                   end: true,
             },
             {
                   to: "/student/results",
-                  label: "My Results",
+                  label: "Mes Résultats",
                   icon: faClipboardCheck,
                   end: false,
             },
@@ -58,7 +58,7 @@ const NAV_ITEMS = {
 
 const ROLE_LABELS = {
       admin: "Administrator",
-      student: "Student",
+      student: "Etudiant",
 };
 
 
@@ -67,7 +67,6 @@ const Sidebar = ({ role = "student", userName = "Jules Titran", onLogout }) => {
 
       const navItems = NAV_ITEMS[role] || [];
       const handleNavClick = () => setOpen(false);
-
       return (
             <>
                   <button
@@ -100,7 +99,7 @@ const Sidebar = ({ role = "student", userName = "Jules Titran", onLogout }) => {
                                           className="h-8 w-8 object-contain"
                                     />
                                     <span className="text-gold font-bold text-xl tracking-tight">
-                                          HEI STDHub
+                                          HEI STDExams
                                     </span>
                               </div>
                               <button
@@ -158,7 +157,7 @@ const Sidebar = ({ role = "student", userName = "Jules Titran", onLogout }) => {
                                     className="w-full px-4 py-2.5 text-xs font-semibold text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-200 text-left flex items-center gap-3 cursor-pointer"
                               >
                                     <FontAwesomeIcon icon={faSignOutAlt} />
-                                    <span>Logout</span>
+                                    <span>Déconnexion</span>
                               </button>
                         </div>
                   </aside>
