@@ -16,7 +16,7 @@ const StudentDashboard = ({ items = [] }) => {
       <div className="w-full bg-navy-dark text-white p-8 rounded-2xl shadow-card flex items-center gap-4 select-none animate-slide-up">
         <FontAwesomeIcon icon={faBookOpen} className="bg-amber-50/20 rounded-xl px-1.5 py-2.5 text-gold text-xl items-center" />
         <div>
-          <h1 className="text-2xl font-bold tracking-wide">Hello, {/* name */}</h1>
+          <h1 className="text-2xl font-bold tracking-wide">Bonjour, {/* name */}</h1>
           <p className="text-sm text-white/60 mt-0.5">{/* available content */}</p>
         </div>
       </div>
@@ -28,7 +28,7 @@ const StudentDashboard = ({ items = [] }) => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search an UE, a course ..."
+            placeholder="Rechercher une UE, un cours..."
             className="w-full bg-white rounded-full pl-10 pr-4 py-2.5 text-sm shadow-card outline-none focus:ring-2 focus:ring-gold"
           />
         </div>
@@ -36,14 +36,14 @@ const StudentDashboard = ({ items = [] }) => {
         <div className="flex flex-wrap items-center gap-3 py-3 mb-6 border-y border-contact/30">
           <div className="flex items-center gap-2 text-navy/60">
           <FontAwesomeIcon icon={faFilter} className="text-[13px]" />
-          <span className="text-[10px] font-bold uppercase">Filter</span>
+          <span className="text-[10px] font-bold uppercase">Filtrer</span>
         </div>
 
         <select className="bg-white border border-contact rounded-lg px-2 py-1 text-sm focus:outline-none focus:border-navy cursor-pointer">
-          <option>All</option>
-          <option>Exams</option>
+          <option>Tout</option>
+          <option>Examens</option>
           <option>TD</option>
-          <option>Courses</option>
+          <option>Cours</option>
         </select>
 
         <div className="relative flex items-center">
