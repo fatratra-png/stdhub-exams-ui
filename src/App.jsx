@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Placeholder from "./pages/Placeholder";
 import Login from "./login/Login";
 import RoleRoute from "./login/RoleRoute";
+import Dashboard from "./pages/admin/Dashboard";
 
 const SpaceLayout = ({ role }) => (
   <div className="flex min-h-screen bg-surface w-full overflow-hidden">
@@ -13,7 +14,6 @@ const SpaceLayout = ({ role }) => (
       <main className="p-6 lg:p-8 flex-1 w-full mx-auto">
         <Outlet />
       </main>
-
     </div>
   </div>
 );
@@ -24,7 +24,7 @@ const App = () => (
     <Route path="/login" element={<Login />} />
 
     <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
-      <Route index element={<Placeholder title="Tableau de bord" description="Compteurs et liens rapides." />} />
+      <Route index element={<Dashboard />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
       <Route path="exams" element={<Placeholder title="Gestion des examens" />} />
