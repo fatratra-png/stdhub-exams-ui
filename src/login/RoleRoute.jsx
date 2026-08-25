@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-function RoleRoute({ children, rolesAutorises }) {
+const RoleRoute = ({ children, rolesAutorises }) => {
   const { user, loading } = useAuth();
 
   if (loading) return <p>Chargement...</p>;

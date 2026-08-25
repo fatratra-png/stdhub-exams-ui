@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import authService from "./authService";
 
-function Login() {
+const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +13,7 @@ function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
         setLoading(true);
@@ -22,7 +22,7 @@ function Login() {
             const data = await authService.login(email, password);
             login(data.user, data.token);
 
-            if (data.user.role === "admin") {
+            if (data.user.role === "ADMIN") {
                 navigate("/admin");
             } else {
                 navigate("/student");
