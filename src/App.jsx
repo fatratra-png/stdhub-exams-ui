@@ -23,7 +23,7 @@ const App = () => (
     <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/login" element={<Login />} />
 
-    <Route path="/admin" element={<RoleRoute rolesAutorises={["admin"]}><SpaceLayout role="admin" /></RoleRoute>}>
+    <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
       <Route index element={<Placeholder title="Tableau de bord" description="Compteurs et liens rapides." />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
@@ -32,7 +32,7 @@ const App = () => (
       <Route path="exams/:id/results" element={<Placeholder title="Résultats de l'examen" />} />
     </Route>
 
-    <Route path="/student" element={<RoleRoute rolesAutorises={["student"]}><SpaceLayout role="student" /></RoleRoute>}>
+    <Route path="/student" element={<RoleRoute rolesAutorises={["STUDENT"]}><SpaceLayout role="STUDENT" /></RoleRoute>}>
       <Route index element={<Placeholder title="Examens disponibles" />} />
       <Route path="exams/:id" element={<Placeholder title="Passage de l'examen" />} />
       <Route path="exams/:id/result" element={<Placeholder title="Note et correction" />} />
