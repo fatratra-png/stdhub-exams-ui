@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useMemo, useCallback} from "react";
-import { fetchCourses, fetchExam, createExam, updateExam, deleteExam } from "../../services/examApi";
-import { ExamHeader } from "../../components/exam/ExamHeader";
-import { ExamGrid } from "../../components/exam/ExamGrid";
-import { ExamCard } from "../../components/exam/ExamCard";
-import { ExamModal } from "../../components/exam/ExamModal";
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../../services/examApi';
+import { ExamHeader } from '../../components/exam/ExamHeader';
+import { ExamGrid } from '../../components/exam/ExamGrid';
+import { ExamModal } from '../../components/exam/ExamModal';
 
 export const ExamsPage = () => {
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
-    const [selectedCourseId, setSelectedCourseId] = useState([]);
+    const [selectedCourseId, setSelectedCourseId] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,20 +17,20 @@ export const ExamsPage = () => {
         setIsLoading(true);
         setError(null);
         try {
-            const [examsData, courseData] = await Promise.all([
+            const [examsData, coursesData] = await Promise.all([
                 fetchExam(selectedCourseId),
                 fetchCourses(),
             ]);
             setExams(examsData);
-            setCourses(courseData);
+            setCourses(coursesData);
         } catch (err) {
             setError(err.message);
         } finally {
             setIsLoading(false);
         }
     }, [selectedCourseId]);
-    
-    useEffect(() =>  {
+
+    useEffect(() => {
         loadData();
     }, [loadData]);
 
@@ -85,29 +84,27 @@ export const ExamsPage = () => {
 
     return (
         <div className="p-8 max-w-7xl mx-auto animate-fade-in">
-        <ExamHeader
-            courses={courses}
-            selectedCourseId={selectedCourseId}
-            onFilterChange={setSelectedCourseId}
-            onOpenCreateModal={handleOpenCreateModal}
-        />
-
-        <ExamGrid
-            exams={exams}
-            coursesMap={coursesMap}
-            isLoading={isLoading}
-            error={error}
-            onEdit={handleOpenEditModal}
-            onDelete={handleDeleteExam}
-        />
-
-        <ExamModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            onSubmit={handleSubmitExam}
-            courses={courses}
-            initialData={editingExam}
-        />
+            <ExamHeader
+                courses={courses}
+                selectedCourseId={selectedCourseId}
+                onFilterChange={setSelectedCourseId}
+                onOpenCreateModal={handleOpenCreateModal}
+            />
+            <ExamGrid
+                exams={exams}
+                coursesMap={coursesMap}
+                isLoading={isLoading}
+                error={error}
+                onEdit={handleOpenEditModal}
+                onDelete={handleDeleteExam}
+            />
+            <ExamModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSubmit={handleSubmitExam}
+                courses={courses}
+                initialData={editingExam}
+            />
         </div>
     );
 };
