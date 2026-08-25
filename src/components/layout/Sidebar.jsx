@@ -14,7 +14,7 @@ import {
 import STDHUB_LOGO from "../../assets/stdhub-logo-pwa.png";
 
 const NAV_ITEMS = {
-      admin: [
+      ADMIN: [
             {
                   to: "/admin",
                   label: "Dashboard",
@@ -40,7 +40,7 @@ const NAV_ITEMS = {
                   end: false,
             },
       ],
-      student: [
+      STUDENT: [
             {
                   to: "/student",
                   label: "Available Exams",
@@ -57,12 +57,12 @@ const NAV_ITEMS = {
 };
 
 const ROLE_LABELS = {
-      admin: "Administrator",
-      student: "Student",
+      ADMIN: "Administrator",
+      STUDENT: "Student",
 };
 
 
-const Sidebar = ({ role = "student", userName = "Jules Titran", onLogout }) => {
+const Sidebar = ({ role = "STUDENT", userName = "Jules Titran", onLogout }) => {
       const [open, setOpen] = useState(false);
 
       const navItems = NAV_ITEMS[role] || [];
