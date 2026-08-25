@@ -32,7 +32,7 @@ const App = () => (
       <Route path="exams/:id/results" element={<Placeholder title="Résultats de l'examen" />} />
     </Route>
 
-    <Route path="/student" element={<RoleRoute rolesAutorises={["student"]}><SpaceLayout role="student" /></RoleRoute>}>
+    <Route path="/student" element={<RoleRoute rolesAutorises={["STUDENT"]}><SpaceLayout role="STUDENT" /></RoleRoute>}>
       <Route index element={<Placeholder title="Examens disponibles" />} />
       <Route path="exams/:id" element={<Placeholder title="Passage de l'examen" />} />
       <Route path="exams/:id/result" element={<Placeholder title="Note et correction" />} />
