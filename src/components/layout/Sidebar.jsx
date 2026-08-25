@@ -15,50 +15,20 @@ import STDHUB_LOGO from "../../assets/stdhub-logo-pwa.png";
 
 const NAV_ITEMS = {
       ADMIN: [
-            {
-                  to: "/admin",
-                  label: "Dashboard",
-                  icon: faChartPie,
-                  end: true,
-            },
-            {
-                  to: "/admin/students",
-                  label: "Students",
-                  icon: faUserGraduate,
-                  end: false,
-            },
-            {
-                  to: "/admin/courses",
-                  label: "Courses",
-                  icon: faBookOpen,
-                  end: false,
-            },
-            {
-                  to: "/admin/exams",
-                  label: "Exams",
-                  icon: faFileAlt,
-                  end: false,
-            },
+            { to: "/admin", label: "Tableau de bord", icon: faChartPie, end: true },
+            { to: "/admin/students", label: "Étudiants", icon: faUserGraduate, end: false },
+            { to: "/admin/courses", label: "Cours", icon: faBookOpen, end: false },
+            { to: "/admin/exams", label: "Examens", icon: faFileAlt, end: false },
       ],
       STUDENT: [
-            {
-                  to: "/student",
-                  label: "Available Exams",
-                  icon: faFileAlt,
-                  end: true,
-            },
-            {
-                  to: "/student/results",
-                  label: "My Results",
-                  icon: faClipboardCheck,
-                  end: false,
-            },
+            { to: "/student", label: "Examens disponibles", icon: faFileAlt, end: true },
+            { to: "/student/results", label: "Mes résultats", icon: faClipboardCheck, end: false },
       ],
 };
 
 const ROLE_LABELS = {
-      ADMIN: "Administrator",
-      STUDENT: "Student",
+      ADMIN: "Administrateur",
+      STUDENT: "Étudiant",
 };
 
 
@@ -158,7 +128,7 @@ const Sidebar = ({ role = "STUDENT", userName = "Jules Titran", onLogout }) => {
                                     className="w-full px-4 py-2.5 text-xs font-semibold text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-200 text-left flex items-center gap-3 cursor-pointer"
                               >
                                     <FontAwesomeIcon icon={faSignOutAlt} />
-                                    <span>Logout</span>
+                                    <span>Déconnexion</span>
                               </button>
                         </div>
                   </aside>
