@@ -35,7 +35,7 @@ const App = () => (
   <Routes>
     <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/login" element={<Login />} />
-
+    
     <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
       <Route index element={<Dashboard />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
