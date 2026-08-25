@@ -23,7 +23,7 @@ const App = () => (
     <Route path="/" element={<Navigate to="/login" replace />} />
     <Route path="/login" element={<Login />} />
 
-    <Route path="/admin" element={<RoleRoute rolesAutorises={["admin"]}><SpaceLayout role="admin" /></RoleRoute>}>
+    <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
       <Route index element={<Placeholder title="Tableau de bord" description="Compteurs et liens rapides." />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
