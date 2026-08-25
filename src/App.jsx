@@ -8,6 +8,7 @@ import Login from "./login/Login";
 import RoleRoute from "./login/RoleRoute";
 import Dashboard from "./pages/admin/Dashboard";
 import { useAuth } from "./login/AuthContext";
+import { ExamsPage } from "./pages/admin/ExamsPage";
 
 const SpaceLayout = ({ role }) => {
   const { logout } = useAuth();
@@ -40,7 +41,7 @@ const App = () => (
       <Route index element={<Dashboard />} />
       <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
-      <Route path="exams" element={<Placeholder title="Gestion des examens" />} />
+      <Route path="exams" element={<ExamsPage />} />
       <Route path="exams/:id/questions" element={<Placeholder title="Éditeur de questions" />} />
       <Route path="exams/:id/results" element={<Placeholder title="Résultats de l'examen" />} />
     </Route>
