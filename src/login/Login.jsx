@@ -16,6 +16,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
+
+        if (!email.endsWith("@mail.hei.school")) {
+            setError("Seules les adresses @mail.hei.school sont autorisées");
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -102,6 +108,8 @@ const Login = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="nom@mail.hei.school"
+                                    pattern=".+@mail\.hei\.school$"
+                                    title="L'email doit se terminer par @mail.hei.school"
                                     required
                                     className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-[#0A1A33] focus:outline-none focus:ring-2 focus:ring-[#0A1A33]"
                                 />
