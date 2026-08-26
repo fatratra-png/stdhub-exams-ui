@@ -44,24 +44,27 @@ export const ExamCard = ({exam, course, onEdit, onDelete}) => {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center justify-end gap-2 mt-6 pt-4 border-t border-contact">
-                <button
-                    onClick={() => onEdit(exam)}
-                    className="px-3 py-1.5 text-xs font-semibold text-navy bg-surface hover:bg-contact rounded-lg transition-colors cursor-pointer"
-                >
-                    Modifier
-                </button>
-                <button
-                    onClick={() => onDelete(exam)}
-                    className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
-                        isLocked
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-red-50 text-red-600 hover:bg-red-100 cursor-pointer'
-                    }`}
-                    title={isLocked ? 'Suppression refusée : des étudiants ont déjà passé cet examen.' : ''}
-                >
-                    Supprimer
-                </button>
+            <div className="flex items-center justify-between gap-2 mt-6 pt-4 border-t border-contact">
+                <button className="px-3 py-1.5 text-xs font-semibold text-navy bg-surface hover:bg-contact rounded-lg transition-colors cursor-pointer">Détails</button>
+                <div className="flex items-center justify-end gap-4">
+                    <button
+                        onClick={() => onEdit(exam)}
+                        className="px-3 py-1.5 text-xs font-semibold text-navy bg-surface hover:bg-contact rounded-lg transition-colors cursor-pointer"
+                    >
+                        Modifier
+                    </button>
+                    <button
+                        onClick={() => onDelete(exam)}
+                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+                            isLocked
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-red-50 text-red-600 hover:bg-red-100 cursor-pointer'
+                        }`}
+                        title={isLocked ? 'Suppression refusée : des étudiants ont déjà passé cet examen.' : ''}
+                    >
+                        Supprimer
+                    </button>
+                </div>
             </div>
         </div>
     );
