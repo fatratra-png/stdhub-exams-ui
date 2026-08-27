@@ -4,7 +4,9 @@ import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../
 import { ExamHeader } from '../../components/exam/ExamHeader';
 import { ExamGrid } from '../../components/exam/ExamGrid';
 import { ExamModal } from '../../components/exam/ExamModal';
+import { useToast } from '../../contexts/ToastContext';
 export const ExamsPage = () => {
+    const { showError } = useToast();
     const navigate = useNavigate();
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -59,13 +61,13 @@ export const ExamsPage = () => {
             setIsModalOpen(false);
             loadData();
         } catch (err) {
-            alert(`Erreur : ${err.message}`);
+            showError(`Erreur : ${err.message}`);
         }
     };
 
     const handleDeleteExam = async (exam) => {
         if ((exam.attemptCount ?? 0) > 0) {
-            alert(`Impossible de supprimer "${exam.title}" : cet examen enregistre déjà ${exam.attemptCount} tentative(s).`);
+            showError(`Impossible de supprimer "${exam.title}" : cet examen enregistre déjà ${exam.attemptCount} tentative(s).`);
             return;
         }
         if (!window.confirm(`Êtes-vous sûr de vouloir supprimer l'examen "${exam.title}" ?`)) {
@@ -76,9 +78,9 @@ export const ExamsPage = () => {
             loadData();
         } catch (err) {
             if (err.status === 409) {
-                alert(`Conflit (409) : ${err.message}`);
+                showError(`Conflit (409) : ${err.message}`);
             } else {
-                alert(`Erreur (${err.status || 'API'}) : ${err.message}`);
+                showError(`Erreur (${err.status || 'API'}) : ${err.message}`);
             }
         }
     };

@@ -4,10 +4,12 @@ import { fetchExamById } from '../../services/examApi';
 import { fetchQuestions, createQuestion, updateQuestion, deleteQuestion } from '../../services/questionApi';
 import { QuestionForm } from '../../components/questions/QuestionForm';
 import { ChoiceOption } from '../../components/questions/ChoiceOption';
+import { useToast } from '../../contexts/ToastContext';
 
 export const ExamDetailsPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const {showError} = useToast();
 
     const [exam, setExam] = useState(null);
     const [questions, setQuestions] = useState([]);
@@ -48,7 +50,7 @@ export const ExamDetailsPage = () => {
             setIsAdding(false);
             loadData();
         } catch (err) {
-            alert(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
+            showError(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
         }
     };
 
@@ -58,7 +60,7 @@ export const ExamDetailsPage = () => {
             setEditingQuestion(null);
             loadData();
         } catch (err) {
-            alert(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
+            showError(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
         }
     };
 
@@ -68,7 +70,7 @@ export const ExamDetailsPage = () => {
             await deleteQuestion(questionId);
             loadData();
         } catch (err) {
-            alert(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
+            showError(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
         }
     };
 

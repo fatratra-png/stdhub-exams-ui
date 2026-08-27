@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import ErrorAlert from "../ui/ErrorAlert";
 
 export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
     const [text, setText] = useState('');
@@ -7,6 +8,7 @@ export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
         {label: '', isCorrect: true},
         {label: '', isCorrect: false},
     ]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if (initialData) {
@@ -35,7 +37,7 @@ export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
 
     const handleAddChoice = () => {
         if (choices.length >= 6) {
-            alert('Un qcm autorise au maximum 6 options par question');
+            setError('Un qcm autorise au maximum 6 options par question');
             return;
         }
         setChoices([...choices, {label: '', isCorrect: false}]);
@@ -43,7 +45,7 @@ export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
 
     const handleRemoveChoice = (indexToRemove) => {
         if (choices.length <= 2) {
-            alert('Une question doit comporter au moins 2 options.');
+            setError('Une question doit comporter au moins 2 options.');
             return;
         }
         const wasCorrect = choices[indexToRemove].isCorrect;
@@ -57,15 +59,15 @@ export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!text.trim()) {
-            alert("L'énoncé de la question est requis.");
+            setError("L'énoncé de la question est requis.");
             return;
         }
         if (choices.some((c) => !c.label.trim())) {
-            alert('Toutes les options de réponse doivent être renseignées.');
+            setError('Toutes les options de réponse doivent être renseignées.');
             return;
         }
         if (!choices.some((c) => c.isCorrect)) {
-            alert('Veuillez désigner au moins une bonne réponse.');
+            setError('Veuillez désigner au moins une bonne réponse.');
             return;
         }
         onSubmit({
@@ -80,6 +82,11 @@ export const QuestionForm = ({initialData, onSubmit, onCancel}) => {
             <h3 className="font-bold text-navy-dark text-sm">
                 {initialData ? 'Modifier la question' : 'Nouvelle question QCM'}
             </h3>
+            {error.trim() !== '' && 
+            <div>
+                <ErrorAlert message={error}/>
+            </div>    
+            }
             <div className="flex gap-3">
                 <div className="flex-1">
                     <label className="block text-xs font-bold text-navy-dark mb-1">Énoncé *</label>
