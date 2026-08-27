@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchExamById } from '../../services/examApi';
 import { fetchQuestions, createQuestion, updateQuestion, deleteQuestion } from '../../services/questionApi';
 import { QuestionForm } from '../../components/questions/QuestionForm';
+import { ChoiceOption } from '../../components/questions/ChoiceOption';
 
 export const ExamDetailsPage = () => {
     const { id } = useParams();
@@ -199,20 +200,7 @@ export const ExamDetailsPage = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2">
-                                {q.choices?.map((c) => (
-                                    <div
-                                        key={c.id}
-                                        className={`text-xs p-2 rounded-lg flex items-center justify-between ${
-                                            c.isCorrect
-                                                ? 'bg-green-50 text-green-800 font-bold border border-green-200'
-                                                : 'bg-surface text-gray-600'
-                                        }`}
-                                    >
-                                        <span>{c.label}</span>
-                                    </div>
-                                ))}
-                            </div>
+                            <div className="mt-3">{q.choices?.map(c => <ChoiceOption key={c.id} label={c.label} isCorrect={c.isCorrect} />)}</div>
                         </div>
                     ))
                 )}
