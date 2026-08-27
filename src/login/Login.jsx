@@ -26,7 +26,11 @@ const Login = () => {
 
         try {
             const data = await authService.login(email, password);
-            login(data.user, data.token);
+
+            const nom = email.split("@")[0];
+            const userWithName = { ...data.user, nom };
+
+            login(userWithName, data.token);
 
             if (data.user.role === "ADMIN") {
                 navigate("/admin");

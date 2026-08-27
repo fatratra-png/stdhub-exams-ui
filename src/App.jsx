@@ -1,16 +1,16 @@
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
-import StudentDashboard from "./components/dashboard/StudentDashboard";
 import StudentsPage from "./pages/StudentPage";
 import Placeholder from "./pages/Placeholder";
 import Login from "./login/Login";
 import RoleRoute from "./login/RoleRoute";
 import Dashboard from "./pages/admin/Dashboard";
+import Profile from "./pages/Profile";
 import { useAuth } from "./login/AuthContext";
 
 const SpaceLayout = ({ role }) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -20,7 +20,7 @@ const SpaceLayout = ({ role }) => {
 
   return (
     <div className="flex min-h-screen bg-surface w-full overflow-hidden">
-      <Sidebar role={role} onLogout={handleLogout} />
+      <Sidebar role={role} userName={user?.nom || user?.email} onLogout={handleLogout} />
       <div className="flex-1 flex flex-col min-w-0 w-full h-screen overflow-y-auto">
         <Navbar />
         <main className="p-6 lg:p-8 flex-1 w-full mx-auto">
@@ -38,7 +38,7 @@ const App = () => (
 
     <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
       <Route index element={<Dashboard />} />
-      <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
+      <Route path="students" element={<StudentsPage />} />
       <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
       <Route path="exams" element={<Placeholder title="Gestion des examens" />} />
       <Route path="exams/:id/questions" element={<Placeholder title="Éditeur de questions" />} />
@@ -50,6 +50,7 @@ const App = () => (
       <Route path="exams/:id" element={<Placeholder title="Passage de l'examen" />} />
       <Route path="exams/:id/result" element={<Placeholder title="Note et correction" />} />
       <Route path="results" element={<Placeholder title="Mes résultats" />} />
+      <Route path="profile" element={<Profile />} />
     </Route>
 
     <Route path="*" element={<Navigate to="/login" replace />} />
