@@ -4,7 +4,9 @@ import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../
 import { ExamHeader } from '../../components/exam/ExamHeader';
 import { ExamGrid } from '../../components/exam/ExamGrid';
 import { ExamModal } from '../../components/exam/ExamModal';
+import { ValidationModal } from '../../components/ui/ValidationModal';
 import { useToast } from '../../contexts/ToastContext';
+
 export const ExamsPage = () => {
     const { showError } = useToast();
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ export const ExamsPage = () => {
     const [error, setError] = useState(null);
     const [editingExam, setEditingExam] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pendingDelete, setPendingDelete] = useState(null);
 
     const loadData = useCallback(async () => {
         setIsLoading(true);
@@ -65,14 +68,17 @@ export const ExamsPage = () => {
         }
     };
 
-    const handleDeleteExam = async (exam) => {
+    const handleRequestDelete = (exam) => {
         if ((exam.attemptCount ?? 0) > 0) {
             showError(`Impossible de supprimer "${exam.title}" : cet examen enregistre déjà ${exam.attemptCount} tentative(s).`);
             return;
         }
-        if (!window.confirm(`Êtes-vous sûr de vouloir supprimer l'examen "${exam.title}" ?`)) {
-            return;
-        }
+        setPendingDelete(exam);
+    };
+
+    const handleConfirmDelete = async () => {
+        const exam = pendingDelete;
+        setPendingDelete(null);
         try {
             await deleteExam(exam.id);
             loadData();
@@ -99,7 +105,7 @@ export const ExamsPage = () => {
                 isLoading={isLoading}
                 error={error}
                 onEdit={handleOpenEditModal}
-                onDelete={handleDeleteExam}
+                onDelete={handleRequestDelete}
                 onDetails={(exam) => navigate(`/admin/exams/${exam.id}/questions`)}
             />
             <ExamModal
@@ -108,6 +114,14 @@ export const ExamsPage = () => {
                 onSubmit={handleSubmitExam}
                 courses={courses}
                 initialData={editingExam}
+            />
+            <ValidationModal
+                isOpen={!!pendingDelete}
+                title="Supprimer l'examen"
+                message={`Êtes-vous sûr de vouloir supprimer l'examen "${pendingDelete?.title}" ? Cette action est irréversible.`}
+                confirmLabel="Supprimer"
+                onConfirm={handleConfirmDelete}
+                onCancel={() => setPendingDelete(null)}
             />
         </div>
     );

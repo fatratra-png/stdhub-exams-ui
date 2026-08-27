@@ -5,18 +5,19 @@ import { fetchQuestions, createQuestion, updateQuestion, deleteQuestion } from '
 import { QuestionForm } from '../../components/questions/QuestionForm';
 import { ChoiceOption } from '../../components/questions/ChoiceOption';
 import { useToast } from '../../contexts/ToastContext';
+import { ValidationModal } from '../../components/ui/ValidationModal';
 
 export const ExamDetailsPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const {showError} = useToast();
-
     const [exam, setExam] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isAdding, setIsAdding] = useState(false);
     const [editingQuestion, setEditingQuestion] = useState(null);
+    const [pendingDelete, setPendingDelete] = useState(null);
 
     const isLocked = (exam?.attemptCount ?? 0) > 0;
     const totalPoints = questions.reduce((sum, q) => sum + (q.score || 0), 0);
@@ -64,13 +65,23 @@ export const ExamDetailsPage = () => {
         }
     };
 
-    const handleDelete = async (questionId) => {
-        if (!window.confirm('Voulez-vous vraiment supprimer cette question ?')) return;
+    const handleRequestDelete = async (questionId) => {
+        setPendingDelete(questionId);
+        return;
+    };
+
+    const handleConfirmDelete = async () => {
+        const questionId = pendingDelete;
+        setPendingDelete(null);
         try {
             await deleteQuestion(questionId);
             loadData();
         } catch (err) {
-            showError(err.status === 409 ? `Conflit (409) : ${err.message}` : `Erreur : ${err.message}`);
+            if (err.status === 409) {
+                showError(`Conflit (409) : ${err.message}`);
+            } else {
+                showError(`Erreur (${err.status || 'API'}) : ${err.message}`);
+            }
         }
     };
 
@@ -194,7 +205,7 @@ export const ExamDetailsPage = () => {
                                             Éditer
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(q.id)}
+                                            onClick={() => handleRequestDelete(q.id)}
                                             className="text-xs font-semibold text-red-600 hover:underline cursor-pointer"
                                         >
                                             Supprimer
@@ -207,6 +218,14 @@ export const ExamDetailsPage = () => {
                     ))
                 )}
             </div>
+            <ValidationModal
+                isOpen={!!pendingDelete}
+                title="Supprimer la question"
+                message={`Êtes-vous sûr de vouloir supprimer la question" ? Cette action est irréversible.`}
+                confirmLabel="Supprimer"
+                onConfirm={handleConfirmDelete}
+                onCancel={() => setPendingDelete(null)}
+            />
         </div>
     );
 };
