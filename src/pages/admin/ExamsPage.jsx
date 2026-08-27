@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../../services/examApi';
 import { ExamHeader } from '../../components/exam/ExamHeader';
 import { ExamGrid } from '../../components/exam/ExamGrid';
 import { ExamModal } from '../../components/exam/ExamModal';
-import { QuestionsManagerModal } from '../../components/questions/QuestionManageModal';
 export const ExamsPage = () => {
+    const navigate = useNavigate();
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
     const [selectedCourseId, setSelectedCourseId] = useState('');
@@ -12,7 +13,6 @@ export const ExamsPage = () => {
     const [error, setError] = useState(null);
     const [editingExam, setEditingExam] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedExamForDetails, setSelectedExamForDetails] = useState(null);
 
     const loadData = useCallback(async () => {
         setIsLoading(true);
@@ -98,7 +98,7 @@ export const ExamsPage = () => {
                 error={error}
                 onEdit={handleOpenEditModal}
                 onDelete={handleDeleteExam}
-                onDetails={(exam) => setSelectedExamForDetails(exam)}
+                onDetails={(exam) => navigate(`/admin/exams/${exam.id}/questions`)}
             />
             <ExamModal
                 isOpen={isModalOpen}
@@ -106,19 +106,6 @@ export const ExamsPage = () => {
                 onSubmit={handleSubmitExam}
                 courses={courses}
                 initialData={editingExam}
-            />
-            <ExamModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={handleSubmitExam}
-                courses={courses}
-                initialData={editingExam}
-            />
-            <QuestionsManagerModal
-                exam={selectedExamForDetails}
-                isOpen={!!selectedExamForDetails}
-                onClose={() => setSelectedExamForDetails(null)}
-                onQuestionsUpdated={loadData}
             />
         </div>
     );
