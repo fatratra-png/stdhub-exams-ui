@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ChoiceOption = ({ label, isCorrect, variant = 'reveal', isSelected = false, onSelect }) => {
+export const ChoiceOption = ({ label, isCorrect, variant = 'reveal', choiceId, isSelected = false, onSelect, correctChoiceId, selectedChoiceId }) => {
     if (variant === 'select') {
         return (
             <label className={`flex items-center gap-3 py-3 px-1 border-b border-contact last:border-b-0 cursor-pointer transition-colors 
@@ -17,6 +17,8 @@ export const ChoiceOption = ({ label, isCorrect, variant = 'reveal', isSelected 
         );
     }
     if (variant === 'result') {
+        const isCorrect = choiceId === correctChoiceId;
+        const isSelected = choiceId === selectedChoiceId;
         const isWrongSelection = isSelected && !isCorrect;
         const highlight = isCorrect || isWrongSelection;
         return (
