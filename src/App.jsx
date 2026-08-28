@@ -14,6 +14,7 @@ import CoursesPage from "./pages/CoursesPage";
 import useCourse from "./hooks/useCourse";
 import StudentForm from "./components/dashboard/StudentForm";
 import StudentList from "./components/dashboard/StudentList";
+import StudentsPage from "./pages/StudentPage";
 import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
