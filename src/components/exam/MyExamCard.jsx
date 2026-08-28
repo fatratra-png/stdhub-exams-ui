@@ -1,4 +1,4 @@
-export const MyExamCard = (exam, course, onPass, isPassed) => {
+export const MyExamCard = ({ exam, course, onPass, isPassed }) => {
     return (
         <div className="card flex flex-col justify-between hover:shadow-lg transition-all">
             <div>
@@ -9,13 +9,13 @@ export const MyExamCard = (exam, course, onPass, isPassed) => {
                 </div>
 
                 <h2 className="text-lg font-bold text-navy-dark mb-2">{exam.title}</h2>
-                {exam.desciption && (
+                {exam.description && (
                     <p className="text-sm text-gray-600 mb-4 line-clamp-2">{exam.description}</p>
                 )}
                 <div className="space-y-1.5 text-xs text-gray-500 border-t border-contact/50 pt-3">
                     <div className="flex justify-between">
                         <span>Début :</span>
-                        <span className="front-medium text-navy-dark">
+                        <span className="font-medium text-navy-dark">
                             {new Date(exam.startDate).toLocaleString('fr-FR')}
                         </span>
                     </div>
@@ -28,17 +28,18 @@ export const MyExamCard = (exam, course, onPass, isPassed) => {
                 </div>
             </div>
             <div className="flex items-center justify-between gap-2 mt-6 pt-4 border-t border-contact">
-                <div className="flex items-center justify-end gap-4">
+                <div className="flex items-center justify-end gap-4 w-full">
                     <button
-                        onClick={() => onPass(exam)}
+                        onClick={() => !isPassed && onPass(exam)}
+                        disabled={isPassed}
                         className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
                             isPassed
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-red-50 text-red-600 hover:bg-red-100 cursor-pointer'
+                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                : 'bg-navy text-white hover:bg-navy-dark cursor-pointer'
                         }`}
-                        title={isPassed ? 'Tentative interdite : vous avez déjà cliqué sur bouton.' : ''}
+                        title={isPassed ? 'Vous avez déjà passé cet examen.' : ''}
                     >
-                        Passer l'examen
+                        {isPassed ? 'Déjà passé' : "Passer l'examen"}
                     </button>
                 </div>
             </div>
