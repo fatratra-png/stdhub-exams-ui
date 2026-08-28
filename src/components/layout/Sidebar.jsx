@@ -109,7 +109,10 @@ const Sidebar = ({ role = "STUDENT", userName = "Jules Titran", onLogout }) => {
                         </nav>
 
                         <div className="border-t border-white/10 pt-4 mt-4 shrink-0 flex flex-col gap-4">
-                              <div className="px-2">
+                              <NavLink
+                                    to={role === "ADMIN" ? "/admin/profile" : "/student/profile"}
+                                    className="px-2 block hover:opacity-80 transition"
+                              >
                                     <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest truncate">
                                           {ROLE_LABELS[role] || "—"}
                                     </p>
@@ -121,7 +124,7 @@ const Sidebar = ({ role = "STUDENT", userName = "Jules Titran", onLogout }) => {
                                                 {userName}
                                           </span>
                                     </div>
-                              </div>
+                              </NavLink>
 
                               <button
                                     onClick={onLogout}

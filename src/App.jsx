@@ -1,12 +1,11 @@
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
-import StudentDashboard from "./components/dashboard/StudentDashboard";
-import StudentsPage from "./pages/StudentPage";
 import Placeholder from "./pages/Placeholder";
 import Login from "./login/Login";
 import RoleRoute from "./login/RoleRoute";
 import Dashboard from "./pages/admin/Dashboard";
+import Profile from "./pages/Profile";
 import { useAuth } from "./login/AuthContext";
 import { ExamsPage } from "./pages/admin/ExamsPage";
 import { ExamDetailsPage } from "./pages/admin/ExamDetailsPage";
@@ -18,7 +17,7 @@ import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
 
 const SpaceLayout = ({ role }) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -28,7 +27,7 @@ const SpaceLayout = ({ role }) => {
 
   return (
     <div className="flex min-h-screen bg-surface w-full overflow-hidden">
-      <Sidebar role={role} onLogout={handleLogout} />
+      <Sidebar role={role} userName={user?.nom || user?.email} onLogout={handleLogout} />
       <div className="flex-1 flex flex-col min-w-0 w-full h-screen overflow-y-auto">
         <Navbar />
         <main className="p-6 lg:p-8 flex-1 w-full mx-auto">
@@ -59,8 +58,10 @@ const App = () => (
         <Route path="exams/:id" element={<ExamTakingPage />} />
         <Route path="exams/:id/result" element={<ExamResultPage />} />
         <Route path="results" element={<Placeholder title="Mes résultats" />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
 
+      <Route path="/admin/profile" element={<RoleRoute rolesAutorises={["ADMIN"]}><Profile /></RoleRoute>} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   </ToastProvider>
