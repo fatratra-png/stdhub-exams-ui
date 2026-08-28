@@ -2,7 +2,7 @@ import { useState } from "react";
 import useCourses from "../../services/useCourse";
 import CourseList from "../../components/courses/CourseList";
 import CourseForm from "../../components/courses/CourseForm";
-
+import { ValidationModal } from "../../components/ui/ValidationModal";
 const CoursesPage = () => {
   const {
     courses,
@@ -15,6 +15,7 @@ const CoursesPage = () => {
   const [editingCourse, setEditingCourse] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
+  const [pendingDelete, setPendingDelete] = useState(null);
 
   const handleSubmit = async (data) => {
     if (editingCourse) {
@@ -25,15 +26,17 @@ const CoursesPage = () => {
     setShowForm(false);
     setEditingCourse(null);
   };
-
-  const handleDelete = async (id) => {
-    if (confirm("Supprimer ce cours ?")) {
-      setDeleteError(null);
-      try {
-        await deleteCourse(id);
-      } catch (err) {
-        setDeleteError(err.message);
-      }
+  const handleRequestDelete = (id) => {
+    setPendingDelete(id);
+  }
+  const handleDelete = async () => {
+    const IdDelete = pendingDelete;
+    setPendingDelete(null);
+    setDeleteError(null);
+    try {
+      await deleteCourse(IdDelete);
+    } catch (err) {
+      setDeleteError(err.message);
     }
   };
 
@@ -76,9 +79,17 @@ const CoursesPage = () => {
             setEditingCourse(c);
             setShowForm(true);
           }}
-          onDelete={handleDelete}
+          onDelete={handleRequestDelete}
         />
       )}
+      <ValidationModal
+        isOpen={!!pendingDelete}
+        title="Supprimer le cours"
+        message={`Êtes-vous sûr de vouloir supprimer le cours "${pendingDelete}" ? Cette action est irréversible.`}
+        confirmLabel="Supprimer"
+        onConfirm={handleDelete}
+        onCancel={() => setPendingDelete(null)}
+        />
     </div>
   );
 }

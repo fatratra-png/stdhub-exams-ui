@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../../contexts/AuthContext";
-import adminApi from "../../services/adminApi";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import adminApi from "../../api/adminApi";
 
 const CARDS = [
   {

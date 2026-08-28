@@ -33,12 +33,12 @@ const useCourse = () => {
         await fetchCourses();
     }
 
-    const deleteStudent = async (id) => {
+    const deleteCourse = async (id) => {
         await apiCourse.delete(id);
         await fetchCourses();
     }
 
-    return { courses, loading, error, createCourse, updateCourse, deleteStudent }; 
+    return { courses, loading, error, createCourse, updateCourse, deleteCourse }; 
 }
 
 export default useCourse;

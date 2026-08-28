@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchExamById } from '../../services/examApi';
-import { fetchQuestions, createQuestion, updateQuestion, deleteQuestion } from '../../services/questionApi';
+import { fetchExamById } from '../../api/examApi';
+import { fetchQuestions, createQuestion, updateQuestion, deleteQuestion } from '../../api/questionApi';
 import { QuestionForm } from '../../components/questions/QuestionForm';
 import { ChoiceOption } from '../../components/questions/ChoiceOption';
 import { useToast } from '../../contexts/ToastContext';
