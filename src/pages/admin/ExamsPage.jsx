@@ -107,6 +107,7 @@ export const ExamsPage = () => {
                 onEdit={handleOpenEditModal}
                 onDelete={handleRequestDelete}
                 onDetails={(exam) => navigate(`/admin/exams/${exam.id}/questions`)}
+                onResults={(exam) => navigate(`/admin/exams/${exam.id}/results`)}
             />
             <ExamModal
                 isOpen={isModalOpen}

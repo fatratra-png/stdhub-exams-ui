@@ -1,7 +1,7 @@
 import React from "react";
 import { getExamStatus } from "../../utils/dateUtils";
 
-export const ExamCard = ({exam, course, onEdit, onDelete, onDetails}) => {
+export const ExamCard = ({exam, course, onEdit, onDelete, onDetails, onResults}) => {
     const status = getExamStatus(exam.startDate, exam.endDate);
     const isLocked = (exam.attemptCount ?? 0) > 0;
     
@@ -51,6 +51,12 @@ export const ExamCard = ({exam, course, onEdit, onDelete, onDetails}) => {
                 >
                     Détails
                 </button>
+                {isLocked && <button
+                    onClick={() => onResults(exam)}
+                    className="px-3 py-1.5 text-xs font-semibold text-navy bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors cursor-pointer"
+                >
+                    Résultats
+                </button>}
                 <div className="flex items-center justify-end gap-4">
                     <button
                         onClick={() => onEdit(exam)}
