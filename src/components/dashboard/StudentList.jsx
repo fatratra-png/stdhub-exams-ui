@@ -41,8 +41,8 @@ const StudentList = ({ students, onEdit, onDeactivate }) => {
                     icon={faUserGraduate}
                     className="text-gold text-xs"
                   />
-                  <span className="font-medium">
-                    {s.firstName} {s.lastName}
+                  <span className="text-md font-medium">
+                    {s.firstName} {s.name}
                   </span>
                 </div>
               </td>
