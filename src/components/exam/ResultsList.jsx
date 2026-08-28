@@ -12,14 +12,14 @@ export const ResultsList = ({results}) => {
             <thead>
             <tr className="border-b border-contact/30 text-navy/50">
                 <th className="py-3 px-4 text-[10px] font-bold uppercase">
-                Étudiant
+                    Étudiant
                 </th>
                 <th className="py-3 px-4 text-[10px] font-bold uppercase">Ref</th>
                 <th className="py-3 px-4 text-[10px] font-bold uppercase">
-                Score
+                    Score
                 </th>
                 <th className="py-3 px-4 text-[10px] font-bold uppercase text-right">
-                Soumis le
+                    Soumis le
                 </th>
             </tr>
             </thead>
