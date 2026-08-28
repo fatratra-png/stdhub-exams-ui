@@ -21,7 +21,7 @@ export const ResultsPage = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [examResults]);
+    }, [id]);
 
     useEffect(() => {
         loadData();
