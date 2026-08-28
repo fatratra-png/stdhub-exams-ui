@@ -2,6 +2,8 @@ import { useState } from "react";
 import useStudents from "../../services/useStudent";
 import StudentList from "../../components/dashboard/StudentList";
 import StudentForm from "../../components/dashboard/StudentForm";
+import { ValidationModal } from "../../components/ui/ValidationModal";
+import { useToast } from "../../contexts/ToastContext";
 
 const StudentsPage = () => {
   const {
@@ -14,6 +16,8 @@ const StudentsPage = () => {
   } = useStudents();
   const [editingStudent, setEditingStudent] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const {showError} = useToast();
+  const [pendingDeactive, setPendingDeactive] = useState(null);
 
   const handleSubmit = async (data) => {
     if (editingStudent) {
@@ -25,9 +29,17 @@ const StudentsPage = () => {
     setEditingStudent(null);
   };
 
-  const handleDeactivate = async (id) => {
-    if (confirm("Désactiver cet étudiant ?")) {
-      await deactivateStudent(id);
+  const handleRequestDeactive = (id) => {
+    setPendingDeactive(id);
+  }
+
+  const handleDeactivate = async () => {
+    const studentId = pendingDeactive;
+    setPendingDeactive(null);
+    try {
+      await deactivateStudent(pendingDeactive);
+    } catch (err) { 
+      showError(`Erreur : ${err.message}`);
     }
   };
 
@@ -68,9 +80,17 @@ const StudentsPage = () => {
             setEditingStudent(s);
             setShowForm(true);
           }}
-          onDeactivate={handleDeactivate}
+          onDeactivate={handleRequestDeactive}
         />
       )}
+      <ValidationModal
+        isOpen={!!pendingDeactive}
+        title="Désactiver l'étudiant"
+        message={`Êtes-vous sûr de vouloir désactivé cet étudiant ? Cette action est irréversible.`}
+        confirmLabel="Désactiver"
+        onConfirm={handleDeactivate}
+        onCancel={() => setPendingDeactive(null)}
+      />
     </div>
   );
 }
