@@ -10,11 +10,16 @@ import { useAuth } from "./login/AuthContext";
 import { ExamsPage } from "./pages/admin/ExamsPage";
 import { ExamDetailsPage } from "./pages/admin/ExamDetailsPage";
 import { ToastProvider } from "./contexts/ToastContext";
+import CoursesPage from "./pages/CoursesPage";
+import useCourse from "./hooks/useCourse";
 import StudentForm from "./components/dashboard/StudentForm";
 import StudentList from "./components/dashboard/StudentList";
+import StudentsPage from "./pages/StudentPage";
 import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
+import { ResultsPage } from "./pages/student/ResultsPage";
+import { ResultsStudentsPage } from "./pages/admin/ResultsStudentsPage";
 
 const SpaceLayout = ({ role }) => {
   const { logout, user } = useAuth();
@@ -47,17 +52,18 @@ const App = () => (
       <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
         <Route index element={<Dashboard />} />
         <Route path="students" element={<StudentsPage />} />
+        <Route path="courses" element={<CoursesPage />} />
         <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="exams/:id/questions" element={<ExamDetailsPage />} />
-        <Route path="exams/:id/results" element={<Placeholder title="Résultats de l'examen" />} />
+        <Route path="exams/:id/results" element={<ResultsStudentsPage/>} />
       </Route>
 
       <Route path="/student" element={<RoleRoute rolesAutorises={["STUDENT"]}><SpaceLayout role="STUDENT" /></RoleRoute>}>
         <Route index element={<MyExamsPage />} />
         <Route path="exams/:id" element={<ExamTakingPage />} />
         <Route path="exams/:id/result" element={<ExamResultPage />} />
-        <Route path="results" element={<Placeholder title="Mes résultats" />} />
+        <Route path="results" element={<ResultsPage />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { ExamCard } from "./ExamCard";
 
-export const ExamGrid = ({exams, coursesMap, isLoading, error, onEdit, onDelete, onDetails}) => {
+export const ExamGrid = ({exams, coursesMap, isLoading, error, onEdit, onDelete, onDetails, onResults}) => {
     if (isLoading) {
         return <div className="card text-center py-12 text-gray-400">Chargement des examens...</div>;
     }
@@ -25,6 +25,7 @@ export const ExamGrid = ({exams, coursesMap, isLoading, error, onEdit, onDelete,
                     onEdit={onEdit}
                     onDelete={onDelete}
                     onDetails={onDetails}
+                    onResults={onResults}
                 />
             ))}
         </div>
