@@ -12,6 +12,7 @@ import { ExamDetailsPage } from "./pages/admin/ExamDetailsPage";
 import { ToastProvider } from "./contexts/ToastContext";
 import StudentForm from "./components/dashboard/StudentForm";
 import StudentList from "./components/dashboard/StudentList";
+import StudentsPage from "./pages/StudentPage";
 import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
