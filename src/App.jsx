@@ -11,6 +11,7 @@ import { useAuth } from "./login/AuthContext";
 import { ExamsPage } from "./pages/admin/ExamsPage";
 import { ExamDetailsPage } from "./pages/admin/ExamDetailsPage";
 import { ToastProvider } from "./contexts/ToastContext";
+import { MyExamsPage } from "./pages/student/MyExamsPage";
 
 const SpaceLayout = ({ role }) => {
   const { logout } = useAuth();
@@ -50,7 +51,7 @@ const App = () => (
       </Route>
 
       <Route path="/student" element={<RoleRoute rolesAutorises={["STUDENT"]}><SpaceLayout role="STUDENT" /></RoleRoute>}>
-        <Route index element={<Placeholder title="Examens disponibles" />} />
+        <Route index element={<MyExamsPage />} />
         <Route path="exams/:id" element={<Placeholder title="Passage de l'examen" />} />
         <Route path="exams/:id/result" element={<Placeholder title="Note et correction" />} />
         <Route path="results" element={<Placeholder title="Mes résultats" />} />
