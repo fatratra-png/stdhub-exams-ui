@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useCourses from "../hooks/useCourse";
-import CourseList from "../components/courses/CourseList";
-import CourseForm from "../components/courses/CourseForm";
+import useCourses from "../../services/useCourse";
+import CourseList from "../../components/courses/CourseList";
+import CourseForm from "../../components/courses/CourseForm";
 
 const CoursesPage = () => {
   const {

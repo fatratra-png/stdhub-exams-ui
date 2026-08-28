@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useStudents from "../hooks/useStudent";
-import StudentList from "../components/dashboard/StudentList";
-import StudentForm from "../components/dashboard/StudentForm";
+import useStudents from "../../services/useStudent";
+import StudentList from "../../components/dashboard/StudentList";
+import StudentForm from "../../components/dashboard/StudentForm";
 
 const StudentsPage = () => {
   const {

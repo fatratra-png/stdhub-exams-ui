@@ -7,7 +7,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAuth } from "../../login/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import adminApi from "../../services/adminApi";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
