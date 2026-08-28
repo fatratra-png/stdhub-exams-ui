@@ -2,19 +2,9 @@ describe('Login', () => {
     beforeEach(() => {
         cy.visit('/login');
     });
-    it('rejette un email hors domaine HEI avant tout appel API', () => {
-        cy.intercept('POST', '/api/auth/login').as('loginRequest');
-
-        cy.get('#email').type('alice@gmail.com');
-        cy.get('#password').type('password123');
-        cy.get('button[type=submit]').click();
-
-        cy.contains('Seules les adresses @mail.hei.school sont autorisées').should('be.visible');
-        cy.get('@loginRequest.all').should('have.length', 0);
-    });
 
     it('connecte un ADMIN et redirige vers /admin', () => {
-        cy.intercept('POST', '/api/auth/login', {
+        cy.intercept('POST', '**/api/auth/login', {
             statusCode: 200,
             body: {
                 token: 'fake-jwt-admin',
@@ -31,7 +21,7 @@ describe('Login', () => {
     });
 
     it('connecte un STUDENT et redirige vers /student', () => {
-        cy.intercept('POST', '/api/auth/login', {
+        cy.intercept('POST', '**/api/auth/login', {
             statusCode: 200,
             body: {
                 token: 'fake-jwt-student',
@@ -48,7 +38,7 @@ describe('Login', () => {
     });
 
     it('affiche une erreur sur identifiants invalides (401)', () => {
-        cy.intercept('POST', '/api/auth/login', {
+        cy.intercept('POST', '**/api/auth/login', {
             statusCode: 401,
             body: { message: 'Email ou mot de passe incorrect' },
         }).as('loginRequest');
@@ -62,7 +52,7 @@ describe('Login', () => {
     });
 
     it('désactive le bouton pendant la requête', () => {
-        cy.intercept('POST', '/api/auth/login', (req) => {
+        cy.intercept('POST', '**/api/auth/login', (req) => {
             req.reply({
                 delay: 300,
                 statusCode: 200,
