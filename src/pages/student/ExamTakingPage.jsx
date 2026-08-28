@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMyExam, submitMyExam } from '../../services/myExamApi';
 import { ChoiceOption } from '../../components/questions/ChoiceOption';
-import { ValidationModal } from '../../components/common/ValidationModal';
+import { ValidationModal } from '../../components/ui/ValidationModal';
 import { useToast } from '../../contexts/ToastContext';
 
 export const ExamTakingPage = () => {
@@ -25,7 +25,7 @@ export const ExamTakingPage = () => {
     const answeredCount = Object.keys(answers).length;
     const totalQuestions = exam?.questions.length ?? 0;
     const allAnswered = totalQuestions > 0 && answeredCount === totalQuestions;
-    
+
     const handleSelect = (questionId, choiceId) => {
         setAnswers((prev) => ({ ...prev, [questionId]: choiceId }));
     };
