@@ -3,7 +3,7 @@ import { fetchExamResults } from "../../services/resultsApi";
 import { useParams } from "react-router-dom";
 import { ResultsList } from "../../components/exam/ResultsList";
 
-export const ResultsPage = () => {
+export const ResultsStudentsPage = () => {
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
