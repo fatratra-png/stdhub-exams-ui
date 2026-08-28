@@ -33,7 +33,7 @@ const StudentList = ({ students, onEdit, onDeactivate }) => {
           {students.map((s) => (
             <tr
               key={s.id}
-              className="border-b border-contact/20 last:border-0 hover:bg-navy-dark/[0.02] transition-colors"
+              className="border-b border-contact/20 last:border-0 hover:bg-navy-dark/2 transition-colors"
             >
               <td className="py-3 px-4">
                 <div className="flex items-center gap-2 text-navy">
@@ -41,8 +41,8 @@ const StudentList = ({ students, onEdit, onDeactivate }) => {
                     icon={faUserGraduate}
                     className="text-gold text-xs"
                   />
-                  <span className="font-medium">
-                    {s.firstName} {s.lastName}
+                  <span className="text-[13px] font-medium">
+                    {s.firstName} {s.name}
                   </span>
                 </div>
               </td>
