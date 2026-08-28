@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../login/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import profileService from "../services/profileService";
 
 const Profile = () => {
@@ -41,7 +41,7 @@ const Profile = () => {
 
     return (
         <div className="max-w-md mx-auto">
-            <h1 className="text-2xl font-bold text-[#0A1A33] mb-6">Mon profil</h1>
+            <h1 className="text-2xl font-bold text-navy-dark mb-6">Mon profil</h1>
 
             <div className="card mb-6">
                 <p className="text-sm text-gray-500">Connecté en tant que</p>

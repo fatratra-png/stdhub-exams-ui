@@ -1,9 +1,10 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
-async function resetPassword(newPassword) {
+const resetPassword = async (id, newPassword) => {
+    const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`${API_URL}/users/reset-password`, {
+    const res = await fetch(`${API_URL}/students/${user.id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../../services/examApi';
+import { fetchExam, fetchCourses, createExam, updateExam, deleteExam } from '../../api/examApi';
 import { ExamHeader } from '../../components/exam/ExamHeader';
 import { ExamGrid } from '../../components/exam/ExamGrid';
 import { ExamModal } from '../../components/exam/ExamModal';
@@ -99,6 +99,14 @@ export const ExamsPage = () => {
                 onFilterChange={setSelectedCourseId}
                 onOpenCreateModal={handleOpenCreateModal}
             />
+            {isModalOpen &&
+                <ExamModal
+                    onClose={() => setIsModalOpen(false)}
+                    onSubmit={handleSubmitExam}
+                    courses={courses}
+                    initialData={editingExam}
+                />
+            }
             <ExamGrid
                 exams={exams}
                 coursesMap={coursesMap}
@@ -108,13 +116,6 @@ export const ExamsPage = () => {
                 onDelete={handleRequestDelete}
                 onDetails={(exam) => navigate(`/admin/exams/${exam.id}/questions`)}
                 onResults={(exam) => navigate(`/admin/exams/${exam.id}/results`)}
-            />
-            <ExamModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={handleSubmitExam}
-                courses={courses}
-                initialData={editingExam}
             />
             <ValidationModal
                 isOpen={!!pendingDelete}

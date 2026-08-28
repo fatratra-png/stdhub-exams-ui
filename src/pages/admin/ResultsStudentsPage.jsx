@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { fetchExamResults } from "../../services/resultsApi";
+import { fetchExamResults } from "../../api/resultsApi";
 import { useParams } from "react-router-dom";
 import { ResultsList } from "../../components/exam/ResultsList";
 

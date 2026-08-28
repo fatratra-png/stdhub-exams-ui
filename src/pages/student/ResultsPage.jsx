@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchMyResults } from '../../services/myExamApi';
+import { fetchMyResults } from '../../api/myExamApi';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import ErrorAlert from '../../components/ui/ErrorAlert';
 import { useToast } from '../../contexts/ToastContext';
