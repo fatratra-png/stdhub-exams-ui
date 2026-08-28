@@ -7,9 +7,9 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAuth } from "../../login/AuthContext";
-import adminApi from "../../services/adminApi";
+import { useAuth } from "../../contexts/AuthContext";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import adminApi from "../../api/adminApi";
 
 const CARDS = [
   {

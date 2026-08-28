@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchMyExams, fetchMyResults } from '../../services/myExamApi';
+import { fetchMyExams, fetchMyResults } from '../../api/myExamApi';
 import { MyExamsGrid } from '../../components/exam/MyExamsGrid';
 import { useToast } from '../../contexts/ToastContext';
 

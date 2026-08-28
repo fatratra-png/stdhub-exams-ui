@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-import authService from "./authService";
+import { useAuth } from "../../contexts/AuthContext";
+import authService from "../../services/authService";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-[#0A1A33] via-[#001948] to-[#0A1A33] flex items-center justify-center px-4 py-8">
+        <div className="min-h-screen bg-linear-to-br from-navy-dark via-navy to-navy-dark flex items-center justify-center px-4 py-8">
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute -top-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
                 <div className="absolute top-1/4 -right-24 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
@@ -89,7 +89,7 @@ const Login = () => {
 
                     <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 py-10">
                         <div className="mb-8">
-                            <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1A33]">Connexion</h1>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-navy-dark">Connexion</h1>
                             <p className="text-gray-400 text-sm mt-1">
                                 Entrez vos identifiants pour continuer
                             </p>
@@ -115,7 +115,7 @@ const Login = () => {
                                     pattern=".+@mail\.hei\.school$"
                                     title="L'email doit se terminer par @mail.hei.school"
                                     required
-                                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-[#0A1A33] focus:outline-none focus:ring-2 focus:ring-[#0A1A33]"
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark"
                                 />
                             </div>
 
@@ -131,14 +131,14 @@ const Login = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder="••••••••"
                                         required
-                                        className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 pr-10 text-[#0A1A33] focus:outline-none focus:ring-2 focus:ring-[#0A1A33]"
+                                        className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 pr-10 text-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark"
                                     />
                                     <button
                                         type="button"
                                         tabIndex={-1}
                                         aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                                         onClick={() => setShowPassword((s) => !s)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0A1A33] transition"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-navy-dark transition"
                                     >
                                         {showPassword ? (
                                             <img src="/oeil-barré.png" alt="" width="20" height="20" />

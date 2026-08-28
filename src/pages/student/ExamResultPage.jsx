@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { fetchMyResults } from '../../services/myExamApi';
+import { fetchMyResults } from '../../api/myExamApi';
 import { ChoiceOption } from '../../components/questions/ChoiceOption';
 import { useToast } from '../../contexts/ToastContext';
 
