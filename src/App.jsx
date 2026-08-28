@@ -11,6 +11,8 @@ import { useAuth } from "./login/AuthContext";
 import { ExamsPage } from "./pages/admin/ExamsPage";
 import { ExamDetailsPage } from "./pages/admin/ExamDetailsPage";
 import { ToastProvider } from "./contexts/ToastContext";
+import StudentForm from "./components/dashboard/StudentForm";
+import StudentList from "./components/dashboard/StudentList";
 import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
@@ -45,7 +47,7 @@ const App = () => (
       
       <Route path="/admin" element={<RoleRoute rolesAutorises={["ADMIN"]}><SpaceLayout role="ADMIN" /></RoleRoute>}>
         <Route index element={<Dashboard />} />
-        <Route path="students" element={<Placeholder title="Gestion des étudiants" />} />
+        <Route path="students" element={<StudentsPage />} />
         <Route path="courses" element={<Placeholder title="Gestion des cours" />} />
         <Route path="exams" element={<ExamsPage />} />
         <Route path="exams/:id/questions" element={<ExamDetailsPage />} />
