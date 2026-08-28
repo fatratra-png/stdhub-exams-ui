@@ -15,6 +15,7 @@ import StudentList from "./components/dashboard/StudentList";
 import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
+import { ResultsPage } from "./pages/student/ResultsPage";
 
 const SpaceLayout = ({ role }) => {
   const { logout, user } = useAuth();
@@ -57,7 +58,7 @@ const App = () => (
         <Route index element={<MyExamsPage />} />
         <Route path="exams/:id" element={<ExamTakingPage />} />
         <Route path="exams/:id/result" element={<ExamResultPage />} />
-        <Route path="results" element={<Placeholder title="Mes résultats" />} />
+        <Route path="results" element={<ResultsPage />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 
