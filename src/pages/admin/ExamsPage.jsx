@@ -99,6 +99,14 @@ export const ExamsPage = () => {
                 onFilterChange={setSelectedCourseId}
                 onOpenCreateModal={handleOpenCreateModal}
             />
+            {isModalOpen &&
+                <ExamModal
+                    onClose={() => setIsModalOpen(false)}
+                    onSubmit={handleSubmitExam}
+                    courses={courses}
+                    initialData={editingExam}
+                />
+            }
             <ExamGrid
                 exams={exams}
                 coursesMap={coursesMap}
@@ -108,13 +116,6 @@ export const ExamsPage = () => {
                 onDelete={handleRequestDelete}
                 onDetails={(exam) => navigate(`/admin/exams/${exam.id}/questions`)}
                 onResults={(exam) => navigate(`/admin/exams/${exam.id}/results`)}
-            />
-            <ExamModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={handleSubmitExam}
-                courses={courses}
-                initialData={editingExam}
             />
             <ValidationModal
                 isOpen={!!pendingDelete}
