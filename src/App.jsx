@@ -19,7 +19,7 @@ import { MyExamsPage } from "./pages/student/MyExamsPage";
 import { ExamTakingPage } from "./pages/student/ExamTakingPage";
 import { ExamResultPage } from "./pages/student/ExamResultPage";
 import { ResultsPage } from "./pages/student/ResultsPage";
-
+import StudentsPage from "./pages/StudentPage";
 
 const SpaceLayout = ({ role }) => {
   const { logout, user } = useAuth();
