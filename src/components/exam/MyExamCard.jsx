@@ -1,10 +1,10 @@
-export const MyExamCard = ({ exam, course, onPass, isPassed }) => {
+export const MyExamCard = ({ exam, onPass, isPassed }) => {
     return (
         <div className="card flex flex-col justify-between hover:shadow-lg transition-all">
             <div>
                 <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-bold text-navy bg-navy/10 px-2.5 py-1 rounded-lg">
-                        {course ? course.code : `UE - ${exam.courseId}`}
+                        {exam.courseName}
                     </span>
                 </div>
 

@@ -1,6 +1,6 @@
 import { MyExamCard } from "./MyExamCard";
 
-export const MyExamsGrid = ({ exams, courseMap, onPass, passedExamIds, isLoading, error }) => {
+export const MyExamsGrid = ({ exams, onPass, passedExamIds, isLoading, error }) => {
     if (isLoading) {
         return <div className="card text-center py-12 text-gray-400">Chargement des examens...</div>;
     }
@@ -20,7 +20,6 @@ export const MyExamsGrid = ({ exams, courseMap, onPass, passedExamIds, isLoading
                 <MyExamCard
                     key={exam.id}
                     exam={exam}
-                    course={courseMap.get(exam.courseId)}
                     onPass={onPass}
                     isPassed={passedExamIds.has(exam.id)}
                 />
